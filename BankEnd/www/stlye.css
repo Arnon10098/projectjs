@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Keania+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Andika+New+Basic:wght@400;700&display=swap');
+ิbody{
+    margin: 0;
+    padding: 0;
+}
+.font_keania{
+    font-family: 'Keania One', cursive;
+}
+.font_prompt{
+    font-family: 'Prompt', sans-serif;
+}
+.font_andika{
+font-family: 'Andika New Basic', sans-serif;
+}
+.jus{
+    justify-content: space-evenly;
+}

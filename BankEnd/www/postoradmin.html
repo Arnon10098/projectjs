@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT NEWs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"  href="stlye.css">
+</head>
+<body bgcolor="#787676">
+    
+    <script src="https://unpkg.com/vue@3"></script>
+        <div id = "app">
+            <div class="bg-[#787676] w-full h-full">
+                <header class ="bg-black/80 flex md:flex-row flex-col w-full md:justify-between justify-center  items-center text-white">
+                    <h1 class ="font_keania  text-[64px] md:ml-20">
+                        IT NEWs
+                    </h1>
+                    
+                </header>
+                
+                <div class = "bg-[#626161] text-center text-[#ffffff] text-[50px] font_prompt  font-semibold ">
+                    Main
+                </div>
+                <br/><br/><br/><br/><br/>
+                <div class="grid grid-cols-2 md:ml-80 w-full">
+                <button @click = "edit()" href="login" class="w-40 h-40 text-center bg-white/50 border-[2.5px] border-black  font_prompt  font-semibold ">
+                    Post
+                </button>
+                <button @click = "clicklogin()" href="login" class="w-40 h-40 text-center bg-white/50 border-[2.5px] border-black font_prompt  font-semibold ">
+                    Admin
+                </button>
+                </div>
+            </div>
+            
+           
+           
+        </div>
+    <script>
+        Vue.createApp({
+          data() {
+            return  {
+                statusToggle:false
+            }
+          },
+          methods:{
+              clicklogin(){
+                  window.location.href="Adminlogin.html"
+              },
+              edit(){
+                    window.location.href="edit.html"
+              }
+          }
+        }).mount('#app')
+      </script>
+
+</body>
+</html>
