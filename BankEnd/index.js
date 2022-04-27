@@ -13,7 +13,7 @@ app.use(bodyparser.urlencoded({extended: false}));
 
 app.use(route)
 
-app.listen(port,host,() => {
+app.listen(port,() => {
 console.log("Start Server on port "+port);
 });
 
