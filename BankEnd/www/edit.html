@@ -22,7 +22,7 @@
             <div v-for="(item, index) in data" class="w-11/12 h-[108px] bg-[#C4C4C4] mx-auto  " >
                 <div class="w-11/12 h-[108px] bg-[#C4C4C4] mx-auto grid grid-cols-[250px_1fr_150px] gap-32 items-center justify-between " >
                     <div class="w-[180px] h-[75px] overflow-hidden  ml-8 rounded-[10px] border-[2.5px] border-black">
-                        <img src="./imge/iPhone-14-pill.webp" class="w-full h-full object-cover" >
+                        <img :src="item.image" class="w-full h-full object-cover" >
                     </div>
                     <div class="font_prompt text-[24px] font-semibold text-white">
                         <p>{{ item.head }}</p>

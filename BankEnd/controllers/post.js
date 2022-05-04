@@ -9,7 +9,7 @@ exports.getPost = async function sayhello(req ,res){
 exports.creatPost = async (req, res) => {
     try{
         const body = req.body;
-        await PostService.creatPost(body.head,body.content);
+        await PostService.creatPost(body.head, body.content, body.image);
         res.status(201).json({
             status: true,
             memsage: "Created"
@@ -26,7 +26,7 @@ exports.editPost = async (req, res) => {
     try{
         const id = req.params.id;
         const body = req.body;
-        await PostService.editPost(body.head,body.content, id);
+        await PostService.editPost(body.head,body.content, id, body.image);
         res.status(200).json({
             status: true,
             memsage: "Edit"

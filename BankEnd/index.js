@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
-const bodyparser = require('body-parser');
+const bodyParser = require('body-parser');
 const db = require('./utils/database');
 const host = process.env.APP_HOST || 'localhost';
 const port = process.env.APP_PORT || 3000;
@@ -9,7 +9,6 @@ const port = process.env.APP_PORT || 3000;
 const expressSession = require('express-session');
 
 const cors = require('cors');
-
 
 const mongoose = require('mongoose');
 
@@ -25,9 +24,9 @@ app.use(expressSession({
 }));
 
 
+app.use(bodyParser.json({ limit: '50mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended: false}));
 
 app.use('/api',require('./routers'));
 

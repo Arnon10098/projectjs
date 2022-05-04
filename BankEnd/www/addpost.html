@@ -7,6 +7,11 @@
     <title>IT NEWs</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"  href="stlye.css">
+    <style>
+        .heigthImg {
+            height: 220px !important;
+        }
+    </style>
 </head>
 <body id="app">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -16,41 +21,72 @@
                 Add Post
             </h1>
         </header>
-        <div class =" w-[800px] h-[600px] mx-auto bg-[#DBDFE7] border-1 border-black   drop-shadow-lg  font_prompt text-[20px] font-semibold mt-8 " >
+        <div class =" w-[800px] min-h-[600px] mx-auto bg-[#DBDFE7] border-1 border-black   drop-shadow-lg  font_prompt text-[20px] font-semibold mt-8" >
             <div class="mx-auto pt-20 pl-12">
                 <div class = " pt-8">
-                    head : <input v-model="head" type="text"> 
+                    head :
+                    <br>
+                    <textarea v-model="head" type="text" class="p-4 w-10/12">
+                    </textarea>
                 </div>
                 <div class = " pt-8">
-                    content  : <input v-model="content" type="text">
+                    content  : 
+                    <br>
+                    <textarea v-model="content" type="text" class="p-4 w-10/12">
+                    </textarea>
                 </div>
-                <!-- <div class = " pt-8">
-                    image : <input type="file">
-                </div> -->
-                <button @click="add()">ADD</button>
+                <div class = " pt-8">
+                    <img :src="image" alt="" :class="{'heigthImg': image}">
+                    image : <input type="file" class="mt-4" @change="onSelectImg($event.target)" >
+                </div>
+                <button @click="add()" class="w-10/12 px-2.5 py-1.5 mt-6 bg-indigo-600 text-white rounded-xl">ADD</button>
             </div>
         </div>
-     <script>
-         Vue.createApp({
-          data() {
-              return {
-                head: '',
-                content: ''
-               }
-          },
-          methods: {
-              add() {
-                  axios.post("http://localhost:5000/api/post", {
-                      head: this.head,
-                      content: this.content
-                  }).then(res => {
-                      alert("ADD Success");
-                  }).catch(() => {
-                      alert("Error")
-                  });
-              }
-          }
-          }).mount('#app')
-     </script>
+
+
 </body>
 </html>
+
+
+<script>
+
+    Vue.createApp({
+        data() {
+            return {
+                head: '',
+                content: '',
+                image: ''
+            }
+        },
+        methods: {
+            onSelectImg(input) {
+                if (input.files && input.files.length > 0) {
+                    let file = input.files[0];
+                    if (file.type.indexOf('image/') >= 0) {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.addEventListener('load', () => {
+                            this.image = reader.result;
+                        });
+                        return;
+                    }
+                }
+                alert('กรุณาเลือกภาพที่จะอัพโหลด');
+            },   
+            add() {
+                axios.post("http://localhost:5000/api/post", {
+                    head: this.head,
+                    content: this.content,
+                    image: this.image
+                }).then(res => {
+                    alert("ADD Success");
+                    window.location.href="./index.html";
+                }).catch(() => {
+                    alert("Error")
+                });
+            }
+        }
+
+    }).mount('#app')
+
+</script>

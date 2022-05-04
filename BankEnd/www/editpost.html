@@ -12,27 +12,34 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3"></script>
-        <header class ="bg-black/80 flex md:flex-row flex-col w-full md:justify-between justify-center  items-center text-white">
-            <h1 class ="font_keania  text-[64px] md:ml-20 ">
-                Edit Post
-            </h1>
-        </header>
-        <div class =" w-[800px] h-[600px] mx-auto bg-[#DBDFE7] border-1 border-black   drop-shadow-lg  font_prompt text-[20px] font-semibold mt-8 " >
-            <div class="mx-auto pt-20 pl-12">
-                <div class = " pt-8">
-                    head Edit : <input v-model="head" type="text"> 
-                </div>
-                <div class = " pt-8">
-                    content Edit  : <input v-model="content" type="text">
-                </div>
-                <!-- <div class = " pt-8">
-                    image : <input type="file">
-                </div> -->
-                <button @click="edit()" class="boeder-1 bg-black text-white px-2 mt-8 ">edit</button>
+
+    <header class ="bg-black/80 flex md:flex-row flex-col w-full md:justify-between justify-center  items-center text-white">
+        <h1 class ="font_keania  text-[64px] md:ml-20 ">
+            Edit Post
+        </h1>
+    </header>
+    <div class =" w-[800px] h-[600px] mx-auto bg-[#DBDFE7] border-1 border-black   drop-shadow-lg  font_prompt text-[20px] font-semibold mt-8 " >
+        <div class="mx-auto pt-20 pl-12">
+            <div class = " pt-8">
+                head Edit : <input v-model="head" type="text"> 
             </div>
+            <div class = " pt-8">
+                content Edit  : <input v-model="content" type="text">
+            </div>
+            <div class = " pt-8">
+                <img :src="image" alt="" :class="{'heigthImg': image}">
+                image : <input type="file" v-model="image" class="mt-4" @change="onSelectImg($event.target)" >
+            </div>
+            <button @click="edit()" class="boeder-1 bg-black text-white px-2 mt-8 mb-20">edit</button>
         </div>
-     <script>
-         Vue.createApp({
+    </div>
+     
+</body>
+</html>
+
+
+<script>
+    Vue.createApp({
         created() {
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
@@ -40,35 +47,52 @@
             this.id = product;
             this.get_data();
         },
-          data() {
-              return {
+        data() {
+            return {
                 id: '',
                 head: '',
                 content: '',
-               }
-          },
-          methods: {
+                image: ''
+            }
+        },
+        methods: {
             get_data() {
-                    axios.get("http://localhost:5000/api/post").then(res => {
-                        this.data = res.data.find(item => item._id == this.id);
-                        this.head = this.data.head,
-                        this.content = this.data.content;
-                    }).catch(() => {
-                        alert("Error Can't Load Data");
-                    });
-                },
-              edit() {
-                  axios.patch("http://localhost:5000/api/post/" + this.id, {
-                      head: this.head,
-                      content: this.content
-                  }).then(res => {
-                      alert("EDIT Success");
-                  }).catch(() => {
-                      alert("Error")
-                  });
-              }
-          }
-          }).mount('#app')
-     </script>
-</body>
-</html>
+                axios.get("http://localhost:5000/api/post").then(res => {
+                    this.data = res.data.find(item => item._id == this.id);
+                    this.head = this.data.head,
+                    this.content = this.data.content;
+                    this.image = this.data.image;
+                }).catch(() => {
+                    alert("Error Can't Load Data");
+                    window.location.href="./edit.html";
+                });
+            },
+            onSelectImg(input) {
+                if (input.files && input.files.length > 0) {
+                    let file = input.files[0];
+                    if (file.type.indexOf('image/') >= 0) {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.addEventListener('load', () => {
+                            this.image = reader.result;
+                        });
+                        return;
+                    }
+                }
+                alert('กรุณาเลือกภาพที่จะอัพโหลด');
+            },
+            edit() {
+                axios.patch("http://localhost:5000/api/post/" + this.id, {
+                    head: this.head,
+                    content: this.content,
+                    image: this.image
+                }).then(res => {
+                    alert("EDIT Success");
+                    window.location.href="./edit.html";
+                }).catch(() => {
+                    alert("Error")
+                });
+            }
+        }
+    }).mount('#app')
+</script>

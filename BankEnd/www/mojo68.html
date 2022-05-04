@@ -27,8 +27,13 @@
                             <h2 class="font_prompt text-[40px] font-semibold text-black">{{ data.head }}<br> 
                             </h2>
                             <div class="w-full bg-black h-0.5 mt-5 "></div>
+                            
+                            <div>
+                                <img :src="data.image" alt="">
+                            </div>
+                            
                             <div class="mt-8">
-                                <p class="font_prompt text-[18px] font-semibold text-black"  >
+                                <p class="font_prompt text-[18px] font-semibold text-black indent-16 leading-relaxed"  >
                                     {{ data.content }}
                                 </p>
                             </div>
@@ -54,12 +59,12 @@
              },
              data() {
                return {
-               message: 'Hello Vue!',
-               data: {
-                   head: '',
-                   content: ''
-               }
-             }
+                    message: 'Hello Vue!',
+                    data: {
+                        head: '',
+                        content: ''
+                    }
+                }
              },
              methods: {
                 get_data(id) {

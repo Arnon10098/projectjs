@@ -1,9 +1,9 @@
 const mongoose = require ('mongoose');
 
 const postSchema = mongoose.Schema({
-    Image : String,
     head : String,
-    content : String
+    content : String,
+    image : String
 });
 
 module.exports = mongoose.model('tb_posts',postSchema);

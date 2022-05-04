@@ -4,19 +4,21 @@ exports.findPost = async () => {
     return await PostModel.find();
 }
 
-exports.creatPost = async (head,content) => {
+exports.creatPost = async (head,content, image) => {
     const Post = new PostModel({
         head : head,
-        content: content
+        content: content,
+        image: image
     });
     return await Post.save();
 }
 
-exports.editPost = async (head,content, id) => {
+exports.editPost = async (head,content, id, image) => {
     return PostModel.updateOne({_id: id},{
         $set: {
             head : head,
-            content: content
+            content: content,
+            image: image
         }
     });
 }
