@@ -57,7 +57,7 @@
         },
         methods: {
             get_data() {
-                axios.get("http://env-8746534.app.ruk-com.cloud/api/post").then(res => {
+                axios.get("https://env-8746534.app.ruk-com.cloud/api/post").then(res => {
                     this.data = res.data.find(item => item._id == this.id);
                     this.head = this.data.head,
                     this.content = this.data.content;
@@ -82,7 +82,7 @@
                 alert('กรุณาเลือกภาพที่จะอัพโหลด');
             },
             edit() {
-                axios.patch("http://env-8746534.app.ruk-com.cloud/api/post/" + this.id, {
+                axios.patch("https://env-8746534.app.ruk-com.cloud/api/post/" + this.id, {
                     head: this.head,
                     content: this.content,
                     image: this.image

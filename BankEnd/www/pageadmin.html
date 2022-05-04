@@ -59,14 +59,14 @@
             },
             methods:{
                 get_data() {
-                    axios.get("http://env-8746534.app.ruk-com.cloud/api/member").then(res => {
+                    axios.get("https://env-8746534.app.ruk-com.cloud/api/member").then(res => {
                         this.data = res.data;
                     }).catch(() => {
                         alert("Error Can't Load Data");
                     });
                 },
                 remove(id) {
-                    axios.delete("http://env-8746534.app.ruk-com.cloud/api/member/" + id).then(res => {
+                    axios.delete("https://env-8746534.app.ruk-com.cloud/api/member/" + id).then(res => {
                        this.get_data();
                     }).catch(() => {
                         alert("Error Can't Load Data");

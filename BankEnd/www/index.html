@@ -49,7 +49,7 @@
           },
           methods:{
               get_data() {
-                axios.get("http://env-8746534.app.ruk-com.cloud/api/post").then(res => {
+                axios.get("https://env-8746534.app.ruk-com.cloud/api/post").then(res => {
                         this.data = res.data;
                     }).catch(() => {
                         alert("Error Can't Load Data");
