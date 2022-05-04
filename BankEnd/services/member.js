@@ -4,16 +4,31 @@ exports.findMember = async () => {
     return await memberModel.find();
 }
 
-exports.creatMember = async (firstname, lastname, username,IDuser,password,E_mail,image) => {
+exports.creatMember = async (firstname, lastname,IDuser,password,E_mail) => {
     const member = new memberModel({
         firstname: firstname,
         lastname : lastname,
-        username: username,
         IDuser : IDuser,
         password : password,
         E_mail : E_mail,
-        image : image
+        // image : image
     });
+
+    return await member.save();
+}
+
+exports.editMember = async (firstname, lastname,IDuser,password,E_mail,id) => {
+    return memberModel.updateOne({_id: id},{
+        $set: {
+            firstname: firstname,
+            lastname : lastname,
+            IDuser : IDuser,
+            password : password,
+            E_mail : E_mail,
+            // image : image
+        }
+    });
+
     return await member.save();
 }
 

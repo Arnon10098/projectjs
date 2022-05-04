@@ -7,12 +7,32 @@ exports.getMember = async function sayhello(req ,res){
 }
 
 exports.creatMember = async (req, res) => {
+    const body = req.body;
     try{
-        const body = req.body;
-        await memberService.creatMember(body.firstname,body.lastname,body.username,body.IDuser,body.password,body.E_mail,body.image);
+        console.log(req);
+        await memberService.creatMember(body.firstname,body.lastname,body.IDuser,body.password,body.E_mail);
         res.status(201).json({
             status: true,
             memsage: "Created"
+        });
+    }catch{
+        res.status(500).json({
+            status: false,
+            memsage: "Error"
+        });
+    }
+}
+
+exports.editMember = async (req, res) => {
+    const body = req.body;
+    const id = req.params.id;
+
+    try{
+        console.log(req);
+        await memberService.editMember(body.firstname,body.lastname,body.IDuser,body.password,body.E_mail, id);
+        res.status(200).json({
+            status: true,
+            memsage: "edit"
         });
     }catch{
         res.status(500).json({

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT NEWs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"  href="stlye.css">
+</head>
+<body id="app">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+        <header class ="bg-black/80 flex md:flex-row flex-col w-full md:justify-between justify-center  items-center text-white">
+            <h1 class ="font_keania  text-[64px] md:ml-20 ">
+                Add Post
+            </h1>
+        </header>
+        <div class =" w-[800px] h-[600px] mx-auto bg-[#DBDFE7] border-1 border-black   drop-shadow-lg  font_prompt text-[20px] font-semibold mt-8 " >
+            <div class="mx-auto pt-20 pl-12">
+                <div class = " pt-8">
+                    head : <input v-model="head" type="text"> 
+                </div>
+                <div class = " pt-8">
+                    content  : <input v-model="content" type="text">
+                </div>
+                <!-- <div class = " pt-8">
+                    image : <input type="file">
+                </div> -->
+                <button @click="add()">ADD</button>
+            </div>
+        </div>
+     <script>
+         Vue.createApp({
+          data() {
+              return {
+                head: '',
+                content: ''
+               }
+          },
+          methods: {
+              add() {
+                  axios.post("http://localhost:5000/api/post", {
+                      head: this.head,
+                      content: this.content
+                  }).then(res => {
+                      alert("ADD Success");
+                  }).catch(() => {
+                      alert("Error")
+                  });
+              }
+          }
+          }).mount('#app')
+     </script>
+</body>
+</html>

@@ -9,7 +9,7 @@ exports.getPost = async function sayhello(req ,res){
 exports.creatPost = async (req, res) => {
     try{
         const body = req.body;
-        await PostService.creatPost(body.Image,body.head,body.content);
+        await PostService.creatPost(body.head,body.content);
         res.status(201).json({
             status: true,
             memsage: "Created"
@@ -21,6 +21,24 @@ exports.creatPost = async (req, res) => {
         });
     }
 }
+
+exports.editPost = async (req, res) => {
+    try{
+        const id = req.params.id;
+        const body = req.body;
+        await PostService.editPost(body.head,body.content, id);
+        res.status(200).json({
+            status: true,
+            memsage: "Edit"
+        });
+    }catch{
+        res.status(500).json({
+            status: false,
+            memsage: "Error"
+        });
+    }
+}
+
 
 exports.deletePost = async (req, res) => {
     const id = req.params.id;

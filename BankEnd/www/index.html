@@ -9,6 +9,7 @@
     <link rel="stylesheet"  href="stlye.css">
 </head>
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3"></script>
         <div id = "app">
             <header class ="bg-black/80 flex md:flex-row flex-col w-full md:justify-between justify-center  items-center text-white">
@@ -23,51 +24,37 @@
                 ข่าวล่าสุด
             </div>
             <div class ="grid md:grid-cols-[9fr_5fr_6fr] md:grid-rows-2 my-14 mx-8 gap-8 justify-center" >
-                <div  class ="relative row-span-2 w-full h-full">
-                    <a  href="i14.html"class ="w-full h-full" >
+                <div v-for="(item, index) in data"  class ="relative row-span-2 w-full h-full">
+                    <a  :href="'mojo68.html?id=' + item._id "class ="w-full h-full" >
                         <img src="./imge/iPhone-14-pill.webp" class ="z-10 w-full h-full object-cover">
                         <div class ="z-20 absolute bg-[#000]/50 bottom-0 w-full text-white text-[28px] font_prompt py-6 px-8  ">
-                            <p @click = "pagemojo()" class=" ">ส่องสเปค Iphone 14 ก่อนเปิดตัว</p>
+                            <p @click = "pagemojo()" class=" ">{{ item.head }}</p>
                         </div>
                     </a>
                 </div>
-                <div   class ="relative w-full h-full row-span-2">
-                    
-                        <img src="./imge/2_165.jpg" class ="w-full h-full object-cover">
-                        <div class ="z-20 absolute bg-[#000]/50 bottom-0 w-full text-white text-[28px] font_prompt py-6 px-8 ">
-                            <p @click = "pagemojo()" class=" ">พรีวิว Mechanical Keyboard  Melgeek Mojo68 Wireless  </p>
-                        </div>
-                    </a>
-                </div>
-                <div class ="relative w-full h-full">
-                    <a  href="https://www.google.com"class ="w-full h-full" >
-                        <img src="./imge/Screenshot 2022-03-25 000533.jpg" class ="w-full h-full object-cover">
-                        <div class ="z-20 absolute bg-[#000]/50 bottom-0 w-full text-white text-[16px] font_prompt py-6 px-8 ">
-                            <p class=" ">AMD รีวิว AMD Ryzen 5 5600X แรงที่สุดของ Ryzen 5 ในวันนี้</p>
-                        </div>
-                    </a>
-                </div>
-                <div class ="relative w-full h-full">
-                    <a  href="https://www.google.com"class ="w-full h-full" >
-                        <img src="./imge/razer-laptop-1536x1024.webp" class ="w-full h-full object-cover">
-                        <div class ="z-20 absolute bg-[#000]/50 bottom-0 w-full text-white text-[16px] font_prompt py-6 px-8 ">
-                            <p class=" ">
-                                NOTEBOOK NEWSโน๊ตบุ๊ค Razer 14″ ลึกลับ คาดใส่ Ryzen 9 กับ RTX 3080 จากการแซวกันของผู้บริหาร Razer กับหัวหน้าฝ่าย AMD
-                            </p>
-                        </div>
-                    </a>
-                </div>
+              </div>  
 
             </div>
-        </div>
+        
     <script>
         Vue.createApp({
+            created() {
+                this.get_data()
+            },
           data() {
             return  {
-                statusToggle:false
+                statusToggle:false,
+                data: []
             }
           },
           methods:{
+              get_data() {
+                axios.get("http://localhost:5000/api/post").then(res => {
+                        this.data = res.data;
+                    }).catch(() => {
+                        alert("Error Can't Load Data");
+                    });
+              },
               clicklogin(){
                   window.location.href="Adminlogin.html"
               },

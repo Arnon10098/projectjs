@@ -8,36 +8,49 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"  href="stlye.css">
 </head>
-<body>
-    <header class ="bg-black/80 flex md:flex-row flex-col w-full md:justify-between justify-center  items-center text-white">
-        <h1 class ="font_keania  text-[64px] md:ml-20">
-            IT NEWs
-        </h1>
-    </header>
-        <div class = "bg-[#626161] text-center text-[#ffffff] text-[40px] font_keania ">
-            Admin login
-        </div>
-        
-    <form action="postoradmin.html">
-        <div class="text-center p-40">
-             <div class = " drop-shadow-lg  font_prompt text-[30px] font-semibold py-6 mr-40" > E-mail : <input type="text "  /></div>
-             <div class = " drop-shadow-lg font_prompt text-[30px] font-semibold py-6 mr-52"> password : <input type="password"  /></div>
-        
-        
-            <button href="clicklogin" class ="py-6 bg-[#4DCE5A] md:mr-20 px-20 py-2 rounded-xl font_prompt mb-6 md:mb-0 text-white mt-8 " >ยืนยันเข้าสู่ระบบ</button>
-        </div>
-    </form>
+<body id="app">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+        <header class ="bg-black/80 flex md:flex-row flex-col w-full md:justify-between justify-center  items-center text-white">
+            <h1 class ="font_keania  text-[64px] md:ml-20">
+                IT NEWs
+            </h1>
+        </header>
+            <div class = "bg-[#626161] text-center text-[#ffffff] text-[40px] font_keania ">
+                Admin login
+            </div>
+            
+        <form >
+            <div class="text-center p-40">
+                <div class = " drop-shadow-lg  font_prompt text-[30px] font-semibold py-6 mr-40" > E-mail : <input v-model="username" type="text "  /></div>
+                <div class = " drop-shadow-lg font_prompt text-[30px] font-semibold py-6 mr-52"> password : <input v-model="password" type="password"  /></div>
+            
+            
+                <button @click="login()" type="button" class ="py-6 bg-[#4DCE5A] md:mr-20 px-20 py-2 rounded-xl font_prompt mb-6 md:mb-0 text-white mt-8 " >ยืนยันเข้าสู่ระบบ</button>
+            </div>
+        </form>
     <script>
         Vue.createApp({
           data() {
             return  {
-                statusToggle:false
+                statusToggle:false,
+                username: '',
+                password: ''
             }
           },
           methods:{
-              clicklogin(){
-                  window.location.href="postoradmin.html"
-              }
+              login() {
+                  axios.post("http://localhost:5000/api/login", {
+                      username: this.username,
+                      password: this.password
+                  }).then(res => {
+                      alert("Login success")
+                      localStorage.setItem("data", res.data.data);
+                      window.location.href = 'postoradmin.html';
+                  }).catch(() => {
+                      alert("Login Error");
+                  });
+              },
           }
         }).mount('#app')
       </script>

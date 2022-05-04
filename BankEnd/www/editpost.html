@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT NEWs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"  href="stlye.css">
+</head>
+<body id="app">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+        <header class ="bg-black/80 flex md:flex-row flex-col w-full md:justify-between justify-center  items-center text-white">
+            <h1 class ="font_keania  text-[64px] md:ml-20 ">
+                Edit Post
+            </h1>
+        </header>
+        <div class =" w-[800px] h-[600px] mx-auto bg-[#DBDFE7] border-1 border-black   drop-shadow-lg  font_prompt text-[20px] font-semibold mt-8 " >
+            <div class="mx-auto pt-20 pl-12">
+                <div class = " pt-8">
+                    head Edit : <input v-model="head" type="text"> 
+                </div>
+                <div class = " pt-8">
+                    content Edit  : <input v-model="content" type="text">
+                </div>
+                <!-- <div class = " pt-8">
+                    image : <input type="file">
+                </div> -->
+                <button @click="edit()" class="boeder-1 bg-black text-white px-2 mt-8 ">edit</button>
+            </div>
+        </div>
+     <script>
+         Vue.createApp({
+        created() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const product = urlParams.get('id')
+            this.id = product;
+            this.get_data();
+        },
+          data() {
+              return {
+                id: '',
+                head: '',
+                content: '',
+               }
+          },
+          methods: {
+            get_data() {
+                    axios.get("http://localhost:5000/api/post").then(res => {
+                        this.data = res.data.find(item => item._id == this.id);
+                        this.head = this.data.head,
+                        this.content = this.data.content;
+                    }).catch(() => {
+                        alert("Error Can't Load Data");
+                    });
+                },
+              edit() {
+                  axios.patch("http://localhost:5000/api/post/" + this.id, {
+                      head: this.head,
+                      content: this.content
+                  }).then(res => {
+                      alert("EDIT Success");
+                  }).catch(() => {
+                      alert("Error")
+                  });
+              }
+          }
+          }).mount('#app')
+     </script>
+</body>
+</html>
