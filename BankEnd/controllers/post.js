@@ -1,5 +1,5 @@
 /*import res from "express/lib/response"; */
-const PostService = require('../services/Post');
+const PostService = require('../services/post.js');
 
 exports.getPost = async function sayhello(req ,res){
     const data = await PostService.findPost();

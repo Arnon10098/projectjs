@@ -1,5 +1,4 @@
 const express = require('express');
-const { get } = require('express/lib/response');
 
 const route = express.Router();
 const { getMember,creatMember,deleteMember, editMember} = require('../controllers/member');

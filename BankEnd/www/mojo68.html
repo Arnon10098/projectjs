@@ -68,7 +68,7 @@
              },
              methods: {
                 get_data(id) {
-                axios.get("http://localhost:5000/api/post").then(res => {
+                axios.get("http://env-8746534.app.ruk-com.cloud/api/post").then(res => {
                         this.data = res.data.find(item => item._id == id)
                     }).catch(() => {
                         alert("Error Can't Load Data");

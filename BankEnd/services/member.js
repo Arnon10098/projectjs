@@ -1,4 +1,4 @@
-const memberModel = require('../models/member');
+const memberModel = require('../models/member.js');
 
 exports.findMember = async () => {
     return await memberModel.find();

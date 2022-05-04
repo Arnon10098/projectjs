@@ -44,7 +44,7 @@
               },
               methods: {
                 get_data() {
-                    axios.get("http://localhost:5000/api/member").then(res => {
+                    axios.get("http://env-8746534.app.ruk-com.cloud/api/member").then(res => {
                         this.data = res.data.find(item => item._id == this.id)
                         
                     }).catch(() => {

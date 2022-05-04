@@ -40,7 +40,7 @@
           },
           methods:{
               login() {
-                  axios.post("http://localhost:5000/api/login", {
+                  axios.post("http://env-8746534.app.ruk-com.cloud/api/login", {
                       username: this.username,
                       password: this.password
                   }).then(res => {
