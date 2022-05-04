@@ -16,6 +16,9 @@
             <h1 class ="font_keania  text-[64px] md:ml-20">
                 Edit
             </h1>
+            <button @click = "clickindex()" href="login" class ="bg-[#4DCE5A] md:mr-20 px-20 py-2 rounded-xl font_prompt mb-6 md:mb-0">
+                go index
+            </button>
         </header>
         <div class ="w-11/12 h-[734px] bg-[#8B8A8A] mx-auto my-12 py-8 flex flex-col gap-y-10">
 
@@ -77,6 +80,9 @@
                         alert("Error Can't Load Data");
                     });
                 },
+                clickindex(){
+                  window.location.href="index.html"
+              },
             }
         }).mount('#app')
           </script>
